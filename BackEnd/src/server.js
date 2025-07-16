@@ -14,19 +14,28 @@ console.log(process.env.MONGO_URI);
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(express.json());//to parse the request body
-app.use(rateLimiter);//to limit the number of requests
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+
+// app.use(cors({
+//   origin: 'http://localhost:5173',
+//   //methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type", "Authorization", 'Access-Control-Allow-Origin'],
+//   requestHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
+// }));
 
 // app.use((req, res, next) => {
 //  console.log(req.path, req.method);
 //   next();
-// });
+// });a
+app.use(cors({
+  origin: 'http://localhost:5173',
+  allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
+  requestHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'], 
+  credentials: true, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 
+app.use(express.json());//to parse the request body
+app.use(rateLimiter);//to limit the number of requests
 app.use("/api/notes", notesRoutes);//to use the notesRoutes
 
 

@@ -12,7 +12,7 @@ export default {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: [ "luxury", "light", "dark", "forest" ],
+    themes: [ "forest" ],
   },
-  darkMode: "luxury",
+ 
 }
